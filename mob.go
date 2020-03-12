@@ -184,9 +184,9 @@ func next() {
 		sayInfo("nothing was done, so nothing to commit")
 	} else {
 		git("add", "--all")
-		git("commit", "--message", "\""+wipCommitMessage+"\"")
+		git("commit", "--message", "\""+wipCommitMessage+"\"", "--no-verify")
 		changes := getChangesOfLastCommit()
-		git("push", remoteName, wipBranch)
+		git("push", remoteName, wipBranch, "--no-verify")
 		say(changes)
 	}
 	showNext()

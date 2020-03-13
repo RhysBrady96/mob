@@ -152,7 +152,7 @@ func start(parameter []string) {
 		git("merge", remoteName+"/"+baseBranch, "--ff-only")
 		git("branch", wipBranch)
 		git("checkout", wipBranch)
-		git("push", "--set-upstream", remoteName, wipBranch)
+		git("push", "--no-verify", "--set-upstream", remoteName, wipBranch)
 	} else if !hasMobbingBranch() && hasMobbingBranchOrigin() {
 		sayInfo("joining mob session")
 		git("checkout", wipBranch)
@@ -165,7 +165,7 @@ func start(parameter []string) {
 		git("merge", remoteName+"/"+baseBranch, "--ff-only")
 		git("branch", wipBranch)
 		git("checkout", wipBranch)
-		git("push", "--set-upstream", remoteName, wipBranch)
+		git("push", "--no-verify", "--set-upstream", remoteName, wipBranch)
 	}
 
 	if len(parameter) > 0 {
@@ -215,9 +215,9 @@ func done() {
 	if hasMobbingBranchOrigin() {
 		if !isNothingToCommit() {
 			git("add", "--all")
-			git("commit", "--message", "\""+wipCommitMessage+"\"")
+			git("commit", "--no-verify", "--message", "\""+wipCommitMessage+"\"")
 		}
-		git("push", remoteName, wipBranch)
+		git("push", "--no-verify", remoteName, wipBranch)
 
 		git("checkout", baseBranch)
 		git("merge", remoteName+"/"+baseBranch, "--ff-only")
